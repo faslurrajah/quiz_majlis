@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "318220615675",
+    "firebase_url": "https://majlisquizapp.firebaseio.com",
+    "project_id": "majlisquizapp",
+    "storage_bucket": "majlisquizapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318220615675:android:86b1638ebfcd6dae19d55e",
+        "android_client_info": {
+          "package_name": "com.fazlurrajah.quizmajlis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318220615675-bjpbmlalidp9sf0r1f3l24it5a2ghovm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvDFMtlJPTuniUwtuXqZOlmmx5eGshkjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318220615675-bjpbmlalidp9sf0r1f3l24it5a2ghovm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

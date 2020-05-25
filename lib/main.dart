@@ -1,6 +1,9 @@
 import 'dart:math';
-
+import 'package:csv/csv.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:async' show Future;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MainLess());
 
@@ -20,8 +23,7 @@ class _MainFullState extends State<MainFull> {
   @override
   void initState() {
     // TODO: implement initState
-    setBoolean();
-    setWinner();
+    readFile();
     WinnerImage = Image(
         height: 100,
         width: 100,
@@ -34,10 +36,40 @@ class _MainFullState extends State<MainFull> {
   Image WinnerImage ;
   List<bool> changeState=[];
   List<dynamic> winnerNumber = [];
+  List<List<dynamic>> data = [];
+  List<List<List<dynamic>>> competitorsList = [];
+  int dayNumber=0;
+  List<List<dynamic>> tempList=[];
   Widget showAni(){
     return WinnerImage;
   }
-  Future loadingWinner(var context1) async {
+
+  readFile() async{
+    var temp=0;
+    final myData = await rootBundle.loadString('images/data.csv');
+    //print(myData);
+    List<List<dynamic>> listData = CsvToListConverter().convert(myData); 
+    data = listData;
+    for(int i=0;i<listData.length;i++){
+      print(listData[i].length);
+      try{if(listData[i][0]!='null') tempList.add(listData[i]);
+      else {
+        temp++;
+        if(temp==2){
+          competitorsList.add(tempList);
+          tempList = [];
+          temp=0;
+        }
+      }}
+      catch(e){
+        print('loop error');
+      }
+      print(tempList);
+    }
+    competitorsList.add(tempList);
+    print('List is $competitorsList');
+  }
+  Future loadingWinner(var context1, int index) async {
     showDialog(
       //barrierDismissible: false,
         context: context1,
@@ -73,10 +105,19 @@ class _MainFullState extends State<MainFull> {
         });
     Future.delayed(new Duration(seconds: 3), () {
       Navigator.pop(context);
-      winnerAnnounce(context);
+      winnerAnnounce(context,index);
     });
   }
-  Future winnerAnnounce(var context1) async {
+  Future winnerAnnounce(var context1, int index) async {
+    int numberOfCompetitors = competitorsList[index].length;
+    int randomNum;
+    try{
+      randomNum = random.nextInt(numberOfCompetitors-1)+1;
+    }
+    catch(e){
+      randomNum = 0;
+    }
+    
     showDialog(
       //barrierDismissible: false,
         context: context1,
@@ -100,21 +141,38 @@ class _MainFullState extends State<MainFull> {
                 Container(
                   // margin: EdgeInsets.only(left: 5),
                     child: Text(
-                      "Winner is",
-                      style: TextStyle(fontSize: 20),
+                      "Congratulations",
+                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                     )),
                 Container(
                   // margin: EdgeInsets.only(left: 5),
                     child: Text(
-                      "Number ${random.nextInt(competitors-1)+1}",
-                      style: TextStyle(fontSize: 30),
+                      "Winner is",
+                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                     )),
+                Container(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                    SizedBox(height: 5,),
+                    Text('${competitorsList[index][randomNum][0]}',style: TextStyle(fontSize: 20),),
+                    SizedBox(height: 5,),
+                    Text('${competitorsList[index][randomNum][1]}',style: TextStyle(fontSize: 20),),
+                    SizedBox(height: 5,),
+                    Text('${competitorsList[index][randomNum][2]}',style: TextStyle(fontSize: 20),),
+                  ],),
+                  // margin: EdgeInsets.only(left: 5),
+                    // child:   Text(
+                    //   "Number $randomNum ${competitorsList[index][randomNum]}",
+                    //   style: TextStyle(fontSize: 30),
+                    // ),
+                    ),
               ],
             ),
           );
         });
   }
-  Future askForCompetitors(var context1) async {
+  Future askForCompetitors(var context1, int index) async {
     showDialog(
       //barrierDismissible: false,
         context: context1,
@@ -152,7 +210,7 @@ class _MainFullState extends State<MainFull> {
 
                   onPressed: (){
                     Navigator.pop(context1);
-                    loadingWinner(context1);
+                    loadingWinner(context1,index);
                   },
                   child: Text('Continue'),)
               ],
@@ -160,18 +218,53 @@ class _MainFullState extends State<MainFull> {
           );
         });
   }
-
-  setBoolean(){
-    for(int i=0;i<30;i++){
-      changeState.add(false);
-    }
+  Future showCompetitors(var context1, int index) async {
+    showDialog(
+      //barrierDismissible: false,
+        context: context1,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding:
+            EdgeInsets.only(top: 10, bottom: 15, right: 0, left: 0),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  // margin: EdgeInsets.only(left: 5),
+                    child: Text(
+                      "Competitors List",
+                      style: TextStyle(fontSize: 20),
+                    )),
+                SizedBox(height: 10),
+                Container(
+                    height: 500,
+                    width: 500,
+                     child:  ListView.builder(
+                      shrinkWrap: true,
+                      //physics: NeverScrollableScrollPhysics(),
+                      itemCount: competitorsList[index].length,
+                      itemBuilder: (context, position) {
+                        
+                          return Container(
+                            margin: EdgeInsets.only(left: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${position+1}) ${competitorsList[index][position][0]} , ${competitorsList[index][position][1]} , ${competitorsList[index][position][2]} '),
+                                SizedBox(height: 5,),
+                              ],
+                            ),
+                          );
+                          },
+                      ),)
+              ],
+            ),
+          );
+        });
+    
   }
-  setWinner(){
-    for(int i=0;i<30;i++){
-      winnerNumber.add('0');
-    }
-
-  }
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
@@ -226,36 +319,58 @@ class _MainFullState extends State<MainFull> {
                     return Column(
                       children: [
                         Card(
-                          color: Colors.white,
-                          elevation: 20,
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 200,
-                            width: 200,
-                            child: Column(
-                              children: [
-                                Expanded(child: Image(image: NetworkImage('https://tlgur.com/d/8noRrR1G'),)),
-                                SizedBox(height: 10,),
-                                Text(
-                                  'வினா ${index+1}',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 10,),
-                              ],
-                            )
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                         color: Color.fromRGBO(244, 244, 244, 1),
+                         elevation: 20,
+                         child: Container(
+                           alignment: Alignment.center,
+                           height: 200,
+                           width: 200,
+                           child: Column(
+                             children: [
+                               Expanded(child: Image(
+                                 //width: 200,
+                                 image: AssetImage('images/frame.jpg'))),
+                              
+                               Container(
+                                 padding: EdgeInsets.all(8.0),
+                                 color: Color.fromRGBO(0, 0, 50, 1),
+                                 child: Text(
+                                   'வினா ${index+1}',
+                                   style: TextStyle(
+                                     backgroundColor: Color.fromRGBO(0, 0, 50, 1),
+                                     color: Colors.white,
+                                     fontWeight: FontWeight.bold,
+                                   ),
+                                 ),
+                               ),
+                               SizedBox(height: 10,),
+                             ],
+                           )
+                         ),
                           ),
-                        ),
                         SizedBox(height: 10,),
                         RaisedButton(
-                          child: Text('Find the winner',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                          
+                          child: Container(
+                            child: Text('Find the winner',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
                           onPressed: (){
-                              //loadingWinner(context);
-                            askForCompetitors(context);
+                            //showCompetitors(context, index);
+                            loadingWinner(context,index);
+                           // askForCompetitors(context,index);
 
 
+                          },
+                          color: Colors.white,
+                        ),
+                        SizedBox(height:5,),
+                        RaisedButton(
+                          child: Text('Show Competitor List',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                          onPressed: (){
+                            showCompetitors(context, index);
+                           // askForCompetitors(context,index);
                           },
                           color: Colors.white,
                         )

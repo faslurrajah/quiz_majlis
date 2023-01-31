@@ -59,13 +59,13 @@ class _MainFull1State extends State<MainFull1> {
       await rootBundle.loadString('images/data.csv').then((value) {
         List listData = CsvToListConverter().convert(value,eol: '\n');
         data = listData;
-        for(int i=0;i<29;i++) {
+        for(int i=0;i<30;i++) {
           competitorsList.add([]);
           winner.add([]);
         }
         print(competitorsList.length);
         listData.forEach((element) {
-          for(int i=4;i<33;i++) {
+          for(int i=4;i<34;i++) {
             //print(element[i]);
             if(element[i]==1) {
               competitorsList[i-4].add([element[0],element[1],element[2]]);

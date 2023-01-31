@@ -417,11 +417,12 @@ class _MainFullState extends State<MainFull> {
                   // Create a grid with 2 columns. If you change the scrollDirection to
                   // horizontal, this produces 2 rows.
                   crossAxisCount: 3,
+
                   // Generate 100 widgets that display their index in the List.
-                  children: List.generate(29, (index) {
+                  children: List.generate(30, (index) {
                     return Container(
                       color: Colors.white,
-                      //height: 400,
+                      height: 150,
                       child: Column(
                         children: [
                           Card(
@@ -432,7 +433,7 @@ class _MainFullState extends State<MainFull> {
                             elevation: 20,
                             child: Container(
                                 alignment: Alignment.center,
-                                height: 200,
+                                height: 50,
                                 width: 200,
                                 child: Column(
                                   children: [
@@ -474,36 +475,36 @@ class _MainFullState extends State<MainFull> {
                             ),
                           ),
                           SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CupertinoButton(
-                                color: CupertinoColors.activeBlue,
-                                child: Container(
-                                    child: Text('Question',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-                                onPressed: (){
-                                  //showCompetitors(context, index);
-                                  showQ(context,index);
-                                  // askForCompetitors(context,index);
-
-
-                                },
-                              ),
-                              SizedBox(width: 10,),
-                              CupertinoButton(
-                                color: CupertinoColors.activeBlue,
-                                child: Container(
-                                    child: Text('Answer',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-                                onPressed: (){
-                                  //showCompetitors(context, index);
-                                  showA(context,index);
-                                  // askForCompetitors(context,index);
-
-
-                                },
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     CupertinoButton(
+                          //       color: CupertinoColors.activeBlue,
+                          //       child: Container(
+                          //           child: Text('Question',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                          //       onPressed: (){
+                          //         //showCompetitors(context, index);
+                          //         showQ(context,index);
+                          //         // askForCompetitors(context,index);
+                          //
+                          //
+                          //       },
+                          //     ),
+                          //     SizedBox(width: 10,),
+                          //     CupertinoButton(
+                          //       color: CupertinoColors.activeBlue,
+                          //       child: Container(
+                          //           child: Text('Answer',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                          //       onPressed: (){
+                          //         //showCompetitors(context, index);
+                          //         showA(context,index);
+                          //         // askForCompetitors(context,index);
+                          //
+                          //
+                          //       },
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(height:10,),
                           CupertinoButton(
                             child: Text('Show Competitor List - ${competitorsList[index].length}',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),

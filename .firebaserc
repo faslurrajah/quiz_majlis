@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "majlisquizapp"
-  }
+    "default": "mmuojkp",
+    "staging": "mmuojkp"
+  },
+  "targets": {}
 }

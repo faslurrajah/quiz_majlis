@@ -102,8 +102,8 @@ class _MainFullState extends State<MainFull> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height-100,
                       //fit: BoxFit.cover,
-                      image: index<9 ? AssetImage('images/Quiz/Question #0${index+1}.png')
-                          :AssetImage('images/Quiz/Question #${index+1}.png')),
+                      image: index<9 ? AssetImage('images/Quiz/Question #0${index+1} Medium.png')
+                          :AssetImage('images/Quiz/Question #${index+1} Medium.png')),
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
 
                 ),
@@ -137,8 +137,8 @@ class _MainFullState extends State<MainFull> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height-100,
                       //fit: BoxFit.cover,
-                      image: index<9 ? AssetImage('images/Ans/Answer #0${index+1}.png')
-                          :AssetImage('images/Ans/Answer #${index+1}.png')),
+                      image: index<9 ? AssetImage('images/Ans/Answer #0${index+1} Medium.png')
+                          :AssetImage('images/Ans/Answer #${index+1} Medium.png')),
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
 
                 ),
@@ -442,8 +442,8 @@ class _MainFullState extends State<MainFull> {
                                     //       width: 200,
                                     //       height:150,
                                     //       fit: BoxFit.cover,
-                                    //       image: index<9 ? AssetImage('images/Quiz/Question #0${index+1}.png')
-                                    //           :AssetImage('images/Quiz/Question #${index+1}.png')),
+                                    //       image: index<9 ? AssetImage('images/Quiz/Question #0${index+1} Medium.png')
+                                    //           :AssetImage('images/Quiz/Question #${index+1} Medium.png')),
                                     //   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
                                     //
                                     // ),

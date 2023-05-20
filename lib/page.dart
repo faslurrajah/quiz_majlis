@@ -102,8 +102,8 @@ class _MainFullState extends State<MainFull> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height-100,
                       //fit: BoxFit.cover,
-                      image: index<9 ? AssetImage('images/Quiz/0${index+1}.jpg')
-                          :AssetImage('images/Quiz/${index+1}.jpg')),
+                      image: index<9 ? AssetImage('images/Quiz/Question #0${index+1}.png')
+                          :AssetImage('images/Quiz/Question #${index+1}.png')),
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
 
                 ),
@@ -137,8 +137,8 @@ class _MainFullState extends State<MainFull> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height-100,
                       //fit: BoxFit.cover,
-                      image: index<9 ? AssetImage('images/Ans/0${index+1}.jpg')
-                          :AssetImage('images/Ans/${index+1}.jpg')),
+                      image: index<9 ? AssetImage('images/Ans/Answer #0${index+1}.png')
+                          :AssetImage('images/Ans/Answer #${index+1}.png')),
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
 
                 ),
@@ -419,7 +419,7 @@ class _MainFullState extends State<MainFull> {
                   crossAxisCount: 3,
 
                   // Generate 100 widgets that display their index in the List.
-                  children: List.generate(30, (index) {
+                  children: List.generate(29, (index) {
                     return Container(
                       color: Colors.white,
                       height: 150,
@@ -442,12 +442,12 @@ class _MainFullState extends State<MainFull> {
                                     //       width: 200,
                                     //       height:150,
                                     //       fit: BoxFit.cover,
-                                    //       image: index<9 ? AssetImage('images/Quiz/0${index+1}.jpg')
-                                    //           :AssetImage('images/Quiz/${index+1}.jpg')),
+                                    //       image: index<9 ? AssetImage('images/Quiz/Question #0${index+1}.png')
+                                    //           :AssetImage('images/Quiz/Question #${index+1}.png')),
                                     //   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
                                     //
                                     // ),
-                                    //SizedBox(height: 10,),
+                                    // SizedBox(height: 10,),
 
                                     Container(
                                       height: 50,
@@ -475,36 +475,36 @@ class _MainFullState extends State<MainFull> {
                             ),
                           ),
                           SizedBox(height: 10,),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     CupertinoButton(
-                          //       color: CupertinoColors.activeBlue,
-                          //       child: Container(
-                          //           child: Text('Question',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-                          //       onPressed: (){
-                          //         //showCompetitors(context, index);
-                          //         showQ(context,index);
-                          //         // askForCompetitors(context,index);
-                          //
-                          //
-                          //       },
-                          //     ),
-                          //     SizedBox(width: 10,),
-                          //     CupertinoButton(
-                          //       color: CupertinoColors.activeBlue,
-                          //       child: Container(
-                          //           child: Text('Answer',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-                          //       onPressed: (){
-                          //         //showCompetitors(context, index);
-                          //         showA(context,index);
-                          //         // askForCompetitors(context,index);
-                          //
-                          //
-                          //       },
-                          //     ),
-                          //   ],
-                          // ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CupertinoButton(
+                                color: CupertinoColors.activeBlue,
+                                child: Container(
+                                    child: Text('Question',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                                onPressed: (){
+                                  //showCompetitors(context, index);
+                                  showQ(context,index);
+                                  // askForCompetitors(context,index);
+
+
+                                },
+                              ),
+                              SizedBox(width: 10,),
+                              CupertinoButton(
+                                color: CupertinoColors.activeBlue,
+                                child: Container(
+                                    child: Text('Answer',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                                onPressed: (){
+                                  //showCompetitors(context, index);
+                                  showA(context,index);
+                                  // askForCompetitors(context,index);
+
+
+                                },
+                              ),
+                            ],
+                          ),
                           SizedBox(height:10,),
                           CupertinoButton(
                             child: Text('Show Competitor List - ${competitorsList[index].length}',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),

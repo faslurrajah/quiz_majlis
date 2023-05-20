@@ -52,10 +52,10 @@ class _QuizHomePageState extends State<QuizHomePage> {
       }
       print(competitorsList.length);
       listData.forEach((element) {
-        for(int i=4;i<34;i++) {
+        for(int i=3;i<32;i++) {
           //print(element[i]);
           if(element[i]==1) {
-            competitorsList[i-4].add([element[0],element[1],element[2]]);
+            competitorsList[i-3].add([element[0],element[1],element[2]]);
           }
         }
       });

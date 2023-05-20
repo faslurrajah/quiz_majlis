@@ -4,6 +4,9 @@ A new Flutter application.
 
 ## Getting Started
 
+
+Flutter Version 2.0.2
+Dark Version 2.12.2
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
